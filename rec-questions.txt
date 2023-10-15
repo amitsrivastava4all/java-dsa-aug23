@@ -1,0 +1,13 @@
+Q1. Given a Number  like 2023, convert it into string like
+e.g 
+Two zero two three
+
+
+Q2. Rope Cutting Problem
+U have rope of length 5 
+Max cut 
+Tell the number of cuts
+Answer 5 (1cm 5 cuts)
+
+
+Q3. Maze Path Diagonal  
