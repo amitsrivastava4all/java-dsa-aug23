@@ -1,0 +1,63 @@
+class Solution {
+    boolean board[][] ;
+    public List<List<String>> solveNQueens(int n) {
+        board = new boolean[n][n]; // all cells are false
+        countNumberofWaysToPlaceAQueen(0); // start with 0 row
+        return finalList;
+    }
+    boolean isSafeToPlace(int row, int col){
+        // case-1 check on above row
+        for(int i = row; i>=0; i--){
+            if(board[i][col]){
+                return false;
+            }
+        }
+        // check left upper diagonal
+            for(int i = row, j = col; i>=0 && j>=0; i--, j--){
+                if(board[i][j]){
+                    return false;
+                }
+            }
+        // check right upper diagonal
+        for(int i = row, j = col; i>=0 && j<board.length; i--,j++){
+            if(board[i][j]){
+                return false;
+            }
+        }
+        return true;
+    }
+    List<List<String>> finalList = new ArrayList<List<String>>();
+    List<String> fillOutput(){
+        List<String> list = new ArrayList<>();
+        String output= "";
+        for(int i = 0; i<board.length; i++){
+            for(int j = 0; j<board[i].length; j++){
+                if(board[i][j]){
+                    output +="Q";
+                }
+                else{
+                    output+=".";
+                }
+            }
+            list.add(output); // Row will be added (Board)
+            output = "";
+        }
+        return list;
+    }
+    int countNumberofWaysToPlaceAQueen(int currentRow){
+        int count = 0;
+            if(currentRow == board.length){
+                finalList.add(fillOutput());
+                return 1;
+            }
+            for(int col =0; col<board[currentRow].length; col++){
+                if(isSafeToPlace(currentRow, col)){
+                    board[currentRow][col] = true; // place a queen
+                    count =count +countNumberofWaysToPlaceAQueen(currentRow+1);
+                    // BackTracking
+                    board[currentRow][col] =false ; // undon the queen
+                }
+            }
+            return count;
+    }
+}
