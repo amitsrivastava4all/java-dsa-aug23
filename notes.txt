@@ -1,0 +1,21 @@
+What is BackTracking?
+Branching - Generate all possibilities and then check each of them for a solution.
+BackTracking - It is an optimize way to determine the path to solve a solution and discard those path which is not part of the solution.
+
+Note: BackTracking Problem given n <=15
+
+Backtracking problems are always implement by using recursion.
+
+e.g 
+Syntax for BackTracking
+void backTracking(){
+    if(termination case){
+        increment or add the result to the answer
+        return 
+    }
+    for(iteration on input){
+        some logic on current value
+        backTracking(current value)
+        undo the current value 
+    }
+}
