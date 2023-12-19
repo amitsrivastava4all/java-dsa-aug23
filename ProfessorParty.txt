@@ -1,0 +1,15 @@
+class Solution {
+
+    public static String PartyType( long a[], int n)
+    {
+        HashMap<Long, Boolean> map = new HashMap<>();
+        // Your code goes here
+        for(int i = 0 ; i<n; i++){
+            if(map.get(a[i])!=null){
+                return "BOYS";
+            }
+            map.put(a[i], true);
+        }
+        return "GIRLS";
+    }
+}
