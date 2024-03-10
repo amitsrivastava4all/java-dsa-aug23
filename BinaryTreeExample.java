@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 // Binary Tree Node We have created...
@@ -60,6 +62,7 @@ class BinaryTreeOperations{
             return ; 
         }
         System.out.println(rootNode.data);
+        
         preOrder(rootNode.left);
         preOrder(rootNode.right);
     }
@@ -69,7 +72,7 @@ class BinaryTreeOperations{
         if(rootNode==null){
             return ; 
         }
-       
+        
         inOrder(rootNode.left);
         System.out.println(rootNode.data);
         inOrder(rootNode.right);
@@ -85,10 +88,58 @@ class BinaryTreeOperations{
         postOrder(rootNode.right);
         System.out.println(rootNode.data);
     }
+    void preOrderIterative(BinaryTree<Integer> root){
+        
+    }
+    void levelOrder(BinaryTree<Integer> root){
+        // Queue store node
+        Queue<BinaryTree<Integer>> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            BinaryTree<Integer> node = queue.poll();
+            System.out.println(node.data);
+            if(node.left!=null){
+                queue.add(node.left);
+            }
+            if(node.right!=null){
+                queue.add(node.right);
+            }
+        }
 
+    }
+    void levelWisePrintOrder(BinaryTree<Integer> root){
+        // Queue store node
+        Queue<BinaryTree<Integer>> queue = new LinkedList<>();
+        queue.add(root);
+        int level  = 0;
+
+        while(!queue.isEmpty()){
+            int queueSize = queue.size(); // Current Size
+            String result = "";
+            for(int i = 1;i <=queueSize; i++){
+                BinaryTree<Integer> node = queue.poll();
+                result = result + " "+node.data;
+                //System.out.print("Level "+level + " " +node.data);
+                if(node.left!=null){
+                    queue.add(node.left);
+                }
+                if(node.right!=null){
+                    queue.add(node.right);
+                }
+            }
+            
+            System.out.println("Level "+level+" : "+result );
+            level++;
+           
+        }
+
+    }
     public static void main(String[] args) {
         BinaryTreeOperations opr = new BinaryTreeOperations();
         BinaryTree<Integer> rootNode = opr.insertion();
-        opr.print(rootNode);
+        //opr.print(rootNode);
+       // opr.levelOrder(rootNode);
+       opr.levelWisePrintOrder(rootNode);
+       
     }
 }
