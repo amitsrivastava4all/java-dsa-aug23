@@ -1,34 +1,68 @@
 import java.util.LinkedList;
 import java.util.Queue;
-class MyStackDemo{
-    Queue<Integer> q1 , q2;
-    MyStackDemo(){
-        q1 = new LinkedList<>(); // Upcasting
-        q2 = new LinkedList<>();
+
+class Stack {
+    private Queue<Integer> queue1;
+    private Queue<Integer> queue2;
+
+    public Stack() {
+        queue1 = new LinkedList<>();
+        queue2 = new LinkedList<>();
     }
-    void push(int val){
-        q2.offer(val);
-        while(!q1.isEmpty()){
-            q2.offer(q1.peek());
-            q1.poll();
+
+    public void push(int ele) {
+        queue1.add(ele);
+    }
+
+    public int pop() {
+        if (queue1.isEmpty()) {
+            return -1;
         }
-        Queue<Integer> temp = q1;
-        q1 = q2;
-        q2  =temp;
+
+        while (queue1.size() > 1) {
+            queue2.add(queue1.poll());
+        }
+        int poppedElement = queue1.poll();
+        Queue<Integer> helper = queue1;
+        queue1 = queue2;
+        queue2 = helper;
+        return poppedElement;
     }
-    int pop(){
-        return q1.poll();
+
+    public int peek() {
+        if (queue1.isEmpty()) {
+            return -1;
+        }
+
+        while (queue1.size() > 1) {
+            queue2.add(queue1.poll());
+        }
+        int poppedElement = queue1.poll();
+        Queue<Integer> helper = queue1;
+        queue1 = queue2;
+        queue1.add(poppedElement);
+        queue2 = helper;
+        return poppedElement;
     }
-    int getTop(){
-        return q1.peek();
+
+    public boolean isEmpty() {
+        return queue1.isEmpty();
     }
+
 }
+
 public class StackUsingQueue {
+
     public static void main(String[] args) {
-        MyStackDemo stack = new MyStackDemo();
-        stack.push(100);
-        stack.push(200);
-        stack.push(300);
-        System.out.println(stack.getTop());
+        Stack stack = new Stack();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        System.out.println(stack.peek());
+        stack.push(40);
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+
     }
+
 }
