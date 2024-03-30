@@ -17,6 +17,29 @@ class TreeOperations{
         root = insertHelper(1, root);
         root = insertHelper(3, root);
         printing(root);
+        System.out.println(search(root, 123)?"Found":"not Found");
+    }
+    void minMax(TreeNode<Integer> currentNode, 
+    int min, int max){
+
+    }
+    boolean search(TreeNode<Integer> currentNode, int searchElement){
+        // Base case
+        if(currentNode == null){
+            return false;
+        }
+        if(currentNode.data == searchElement){
+            return true;
+        }
+        // true if found
+        // false if not found
+        if(searchElement<currentNode.data){
+            return search(currentNode.leftChild, searchElement);
+        }
+        else{
+        // if(searchElement>currentNode.data){
+            return search(currentNode.rightChild, searchElement);
+        }
     }
     void printing(TreeNode<Integer> currentNode){
         if(currentNode != null){
